@@ -33,3 +33,6 @@
 - [x] Created `README.md` with full setup instructions.
 - [x] Conducted final validation of AI conversion and Syntax Guard.
 - [x] Project ready for hand-off.
+
+### Phase 6: Maintenance & Refinement
+- [x] Removed strict syntax validation to allow more flexible input processing, including support for comments.

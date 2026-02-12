@@ -423,16 +423,8 @@
                         messages: [
                             {
                                 role: 'system',
-                                content: `You are a Universal Automation Converter with STRICT syntax validation.
+                                content: `You are a Universal Automation Converter.
                                 
-                                BEFORE CONVERSION:
-                                1. Analyze the input code for syntax errors. 
-                                2. Be extremely pedantic about:
-                                   - Missing semicolons (;) at the end of statements (for Java, C#, JS).
-                                   - Unclosed brackets (), [], {}.
-                                3. If any syntax error is found, return ONLY a JSON object: {"error": "Description", "line": line_number}
-                                
-                                IF CODE IS VALID:
                                 1. Identify source language and convert to Playwright ${langEl.value}.
                                 2. Return ONLY the code, no markdown.`
                             },
@@ -447,20 +439,9 @@
                 const data = await response.json();
                 let result = data.message.content.trim();
 
-                if (result.startsWith('{') && result.includes('"error"')) {
-                    try {
-                        const errObj = JSON.parse(result.match(/\{.*\}/s)[0]);
-                        displayError(errObj.error, errObj.line);
-                        outputEl.value = '// Conversion halted due to source errors.';
-                    } catch (e) {
-                        result = result.replace(/```[a-z]*\n/g, '').replace(/```/g, '').trim();
-                        outputEl.value = result;
-                    }
-                } else {
-                    result = result.replace(/```[a-z]*\n/g, '').replace(/```/g, '').trim();
-                    outputEl.value = result;
-                    showStatus('✅ Conversion Successful!', false);
-                }
+                result = result.replace(/```[a-z]*\n/g, '').replace(/```/g, '').trim();
+                outputEl.value = result;
+                showStatus('✅ Conversion Successful!', false);
             } catch (error) {
                 outputEl.value = `// Error: Connection lost.`;
                 showStatus('❌ System Error', false);
