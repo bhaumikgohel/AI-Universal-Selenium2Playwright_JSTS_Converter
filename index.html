@@ -54,11 +54,11 @@
 
         @keyframes move {
             from {
-                transform: translate(-10%, -10%);
+                transform: translate(-10%, -10%) scale(1);
             }
 
             to {
-                transform: translate(20%, 20%);
+                transform: translate(20%, 20%) scale(1.1);
             }
         }
 
@@ -269,6 +269,16 @@
             }
         }
 
+        @media (max-width: 768px) {
+            #status-bar {
+                bottom: 1rem;
+                padding: 0.5rem 1.25rem;
+                font-size: 0.8rem;
+                width: 90%;
+                justify-content: center;
+            }
+        }
+
         /* Utility */
         .action-link {
             cursor: pointer;
@@ -316,7 +326,18 @@
             border-color: var(--accent);
         }
 
-        /* Responsive */
+        /* Media Queries for fine-tuned responsiveness */
+        @media (max-width: 1400px) {
+            main {
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            header {
+                padding: 1.25rem 2rem;
+            }
+        }
+
         @media (max-width: 1100px) {
             main {
                 grid-template-columns: 1fr;
@@ -333,6 +354,66 @@
                 padding: 1rem 1.5rem;
             }
         }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+
+            .controls {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            select,
+            button {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+            }
+
+            main {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            textarea {
+                padding: 1rem;
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo span {
+                display: none;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            select,
+            button {
+                width: 100%;
+            }
+
+            header {
+                align-items: center;
+            }
+
+            .logo {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -344,7 +425,7 @@
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
-            AI Universal Script Converter
+            <span>Universal AI Converter</span>
         </div>
         <div class="controls">
             <select id="language">
